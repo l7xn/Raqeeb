@@ -1,0 +1,65 @@
+{
+  "1": {
+    "class": "person",
+    "first_seen": "2026-10-12T00:53:10",
+    "last_seen": "2026-10-12T00:54:01",
+    "frames": 299,
+    "color": "Green"
+  },
+  "2": {
+    "class": "tv",
+    "first_seen": "2026-10-12T00:53:55",
+    "last_seen": "2026-10-12T00:54:01",
+    "frames": 45,
+    "color": "Green"
+  },
+  "8": {
+    "class": "person",
+    "first_seen": "2026-10-12T00:54:08",
+    "last_seen": "2026-10-12T00:54:10",
+    "frames": 13,
+    "color": "Blue"
+  },
+  "11": {
+    "class": "person",
+    "first_seen": "2026-10-12T00:54:11",
+    "last_seen": "2026-10-12T00:54:18",
+    "frames": 41,
+    "color": "Yellow"
+  },
+  "13": {
+    "class": "person",
+    "first_seen": "2026-10-12T00:54:41",
+    "last_seen": "2026-10-12T00:54:54",
+    "frames": 79,
+    "color": "Blue"
+  },
+  "14": {
+    "class": "person",
+    "first_seen": "2026-10-12T00:54:55",
+    "last_seen": "2026-10-12T00:55:08",
+    "frames": 82,
+    "color": "Green"
+  },
+  "15": {
+    "class": "person",
+    "first_seen": "2026-10-12T00:55:13",
+    "last_seen": "2026-10-12T00:58:36",
+    "frames": 794,
+    "color": "Green"
+  },
+  "16": {
+    "class": "person",
+    "first_seen": "2026-10-12T00:57:12",
+    "last_seen": "2026-10-12T00:57:38",
+    "frames": 58,
+    "color": "Green"
+  },
+  "17": {
+    "class": "person",
+    "first_seen": "2026-10-12T00:59:08",
+    "last_seen": "2026-10-12T00:59:20",
+    "frames": 27,
+    "color": "Yellow"
+  }
+}

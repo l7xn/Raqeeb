@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="auto">
   <head>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>SentinelOps — Venue Security Demo</title>
+    <title>Raqeeb — Venue Security & AI Demo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -20,18 +20,19 @@
       }
       :root {
         color-scheme: dark;
-        --bg: #070b14;
-        --card: #0d1424;
-        --c2: #111a2e;
-        --bd: #1b2740;
-        --tx: #e6ecf8;
-        --mu: #7f8db0;
-        --cy: #22d3ee;
-        --gr: #34d399;
-        --am: #fbbf24;
-        --or: #fb923c;
-        --rd: #f43f5e;
-        --bl: #818cf8;
+        --bg: #0a1110;
+        --card: #111a18;
+        --c2: #17221f;
+        --bd: #2a3934;
+        --tx: #edf4ef;
+        --mu: #98aaa2;
+        --cy: #64ddbf;
+        --gr: #c1e879;
+        --am: #f2bd68;
+        --or: #ef8f63;
+        --rd: #ff7168;
+        --bl: #8caeff;
+        --muted-foreground: #111a2eb5;
         box-sizing: border-box;
         padding-top: env(safe-area-inset-top, 0px);
         padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -41,11 +42,12 @@
       }
       body {
         background:
-          radial-gradient(1200px 500px at 70% -10%, #12325a44, transparent),
+          linear-gradient(135deg, #101a16 0%, transparent 42%),
+          linear-gradient(315deg, #10191b 0%, transparent 48%),
           var(--bg);
         color: var(--tx);
         font:
-          14px/1.45 Inter,
+          14px/1.5 "IBM Plex Sans",
           system-ui,
           sans-serif;
       }
@@ -67,17 +69,46 @@
       }
       .logo {
         font-weight: 700;
-        font-size: 16px;
+        font-size: 25px;
         padding: 4px 10px 16px;
         display: flex;
         gap: 8px;
         align-items: center;
+      }
+      .logo span {
+        color: transparent;
+        background: linear-gradient(
+          110deg,
+          var(--tx) 0%,
+          var(--tx) 40%,
+          #fff 48%,
+          #a5f3fc 52%,
+          var(--tx) 60%,
+          var(--tx) 100%
+        );
+        background-size: 250% 100%;
+        background-position: 0 50%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        animation: logo-shimmer 3.2s ease-in-out infinite alternate;
+      }
+      @keyframes logo-shimmer {
+        to {
+          background-position: 100% 50%;
+        }
       }
       .logo i {
         width: 26px;
         height: 26px;
         border-radius: 8px;
         background: linear-gradient(135deg, var(--cy), var(--bl));
+      }
+      .logo-eye {
+        width: 30px;
+        height: 30px;
+        flex: none;
+        color: var(--cy);
+        filter: drop-shadow(0 0 7px #64ddbf33);
       }
       nav a {
         display: flex;
@@ -471,6 +502,104 @@
       .nt.cr {
         box-shadow: 0 0 16px #f43f5e33;
       }
+      .chat-launch {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        z-index: 40;
+        border: 1px solid #22d3ee66;
+        background: var(--c2);
+        color: var(--cy);
+        padding: 11px 15px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 8px 24px #0008;
+      }
+      #chat {
+        position: fixed;
+        right: 22px;
+        bottom: 78px;
+        z-index: 40;
+        width: 380px;
+        max-width: calc(100vw - 28px);
+        height: min(520px, calc(100dvh - 110px));
+        display: none;
+        grid-template-rows: auto 1fr auto;
+        background: var(--card);
+        border: 1px solid var(--bd);
+        border-radius: 14px;
+        box-shadow: 0 18px 50px #000a;
+        overflow: hidden;
+      }
+      #chat.on {
+        display: grid;
+      }
+      #chatHead,
+      #chatForm {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 10px 12px;
+      }
+      #chatHead {
+        background: var(--c2);
+        border-bottom: 1px solid var(--bd);
+      }
+      #chatForm {
+        border-top: 1px solid var(--bd);
+      }
+      #chatLog {
+        padding: 12px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .chat-msg {
+        max-width: 92%;
+        padding: 9px 11px;
+        border: 1px solid var(--bd);
+        border-radius: 10px;
+        background: var(--c2);
+        font-size: 13px;
+        white-space: pre-wrap;
+      }
+      .chat-msg.user {
+        align-self: flex-end;
+        border-color: #22d3ee55;
+        background: #22d3ee12;
+      }
+      .chat-result {
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #22d3ee55;
+        border-radius: 10px;
+        background: #22d3ee0b;
+        font-size: 13px;
+      }
+      .chat-result div {
+        margin: 4px 0;
+      }
+      .chat-result small {
+        color: var(--mu);
+      }
+      #chatInput {
+        flex: 1;
+        min-width: 0;
+        background: var(--c2);
+        border: 1px solid var(--bd);
+        border-radius: 9px;
+        color: var(--tx);
+        padding: 9px 10px;
+        font: inherit;
+        outline: 0;
+      }
+      #chatInput:focus {
+        border-color: var(--cy);
+      }
       .ev {
         display: grid;
         grid-template-columns: 58px 1fr;
@@ -581,6 +710,32 @@
         font: 600 10px monospace;
         color: var(--rd);
       }
+      .aif {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 100%;
+        max-width: 100%;
+      }
+      .aif img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+      .bx.lv {
+        animation: none;
+        transition: all 0.2s linear;
+      }
+      .bx.lv.ot {
+        border-color: var(--bl);
+        background: #818cf810;
+      }
+      .bx.lv.ot em {
+        background: var(--bl);
+      }
       .cams {
         grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       }
@@ -598,19 +753,282 @@
           animation: none !important;
         }
       }
+
+      /* --- Emergency Lockdown Styles --- */
+      @keyframes lockdownFlash {
+        0% { box-shadow: inset 0 0 0px 0px rgba(244, 63, 94, 0); }
+        50% { box-shadow: inset 0 0 100px 30px rgba(244, 63, 94, 0.8); }
+        100% { box-shadow: inset 0 0 0px 0px rgba(244, 63, 94, 0); }
+      }
+      body.lockdown {
+        animation: lockdownFlash 1s infinite;
+      }
+      @keyframes alertEdgePulse {
+        0%,
+        100% {
+          opacity: 0.55;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      body.lockdown::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 79;
+        pointer-events: none;
+        border: 8px solid var(--rd);
+        box-shadow: inset 0 0 28px 5px #ff716877, 0 0 22px 6px #ff716866;
+        animation: alertEdgePulse 0.85s ease-in-out infinite;
+      }
+      .critical-modal {
+        border: 3px solid var(--rd) !important;
+        box-shadow: 0 0 50px rgba(244, 63, 94, 0.5) !important;
+        background: linear-gradient(180deg, #300000, var(--card)) !important;
+      }
+      h1,
+      h2,
+      .logo {
+        font-family: "Barlow Condensed", "IBM Plex Sans", sans-serif;
+        letter-spacing: 0;
+      }
+      h1 {
+        font-size: 30px;
+        line-height: 1.05;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 19px;
+        line-height: 1.15;
+        font-weight: 600;
+      }
+      body {
+        background-color: var(--bg);
+      }
+      nav {
+        width: 244px;
+        background: #0b1210f2;
+        border-color: #25332f;
+      }
+      .logo {
+        font-size: 29px;
+      }
+      .logo i {
+        border-radius: 7px;
+        background: var(--gr);
+        box-shadow: 0 0 18px #c1e8792b;
+      }
+      .logo-eye {
+        color: var(--cy);
+      }
+      nav a {
+        border-radius: 6px;
+        padding: 10px 12px;
+      }
+      nav a.on {
+        background: #64ddbf14;
+        box-shadow: inset 3px 0 var(--cy);
+      }
+      .sys {
+        border-radius: 7px;
+        background: #101917;
+      }
+      .top {
+        background: #0a1110ed;
+        border-color: #25332f;
+      }
+      .top input,
+      #chatInput {
+        background: #111a18;
+        border-color: #354640;
+        border-radius: 7px;
+      }
+      .chip {
+        border-radius: 6px;
+        background: #111a18;
+      }
+      main {
+        padding: 28px clamp(18px, 3vw, 38px);
+        gap: 18px;
+      }
+      .card {
+        background: linear-gradient(145deg, #141f1c, #101816 72%);
+        border-color: #293934;
+        border-radius: 8px;
+        padding: 17px;
+        box-shadow: 0 10px 28px #0003;
+      }
+      .btn {
+        background: var(--cy);
+        color: #081411;
+        border-radius: 6px;
+        padding: 9px 13px;
+        transition: transform 150ms ease, background 150ms ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        background: #8be8ce;
+      }
+      .btn.o {
+        background: transparent;
+        color: var(--tx);
+        border-color: #3a4a44;
+      }
+      .btn.o:hover {
+        color: var(--cy);
+        border-color: var(--cy);
+        background: #64ddbf0d;
+      }
+      .b {
+        border-radius: 4px;
+      }
+      .al,
+      .nt,
+      .kv div,
+      .wf div {
+        border-radius: 6px;
+      }
+      .al {
+        background: #121b19;
+      }
+      .ev {
+        grid-template-columns: 66px minmax(0, 1fr);
+        padding: 11px 2px;
+      }
+      .ev > span:first-child,
+      .big,
+      .kv small,
+      td:first-child,
+      .tag,
+      .rec {
+        font-variant-numeric: tabular-nums;
+      }
+      .tag {
+        border-radius: 3px;
+      }
+      .vid {
+        border-radius: 6px;
+        border-color: #33423d;
+        background: linear-gradient(145deg, #101715, #17211e);
+      }
+      .chat-launch {
+        border-radius: 7px;
+        border-color: #64ddbf77;
+        background: #15211e;
+      }
+      #chat {
+        border-radius: 8px;
+      }
+      .page-head,
+      .section-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 18px;
+      }
+      .page-head > div:first-child {
+        display: grid;
+        gap: 5px;
+      }
+      .eyebrow {
+        color: var(--gr);
+        font: 600 11px/1.2 "IBM Plex Mono", monospace;
+        text-transform: uppercase;
+      }
+      .page-actions,
+      .section-actions,
+      .quick-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-head {
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .section-head h2 {
+        margin: 0;
+      }
+      .quick-actions {
+        margin-top: 14px;
+      }
+      .quick-actions .btn {
+        padding: 8px 11px;
+      }
+      .mode-chip {
+        color: var(--gr);
+        border-color: #c1e87955;
+      }
+      #np {
+        border-radius: 8px;
+      }
+      select {
+        border-radius: 6px;
+      }
+      @media (max-width: 820px) {
+        nav {
+          width: 64px;
+        }
+        .page-head {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+      @media (max-width: 560px) {
+        .top {
+          flex-wrap: wrap;
+          padding: 9px 12px;
+        }
+        .top input {
+          flex: 1 0 100%;
+          max-width: none;
+        }
+        .top .chip {
+          padding: 6px 8px;
+          font-size: 11px;
+        }
+        main {
+          padding: 16px 12px 24px;
+        }
+        .page-actions,
+        .section-actions {
+          width: 100%;
+        }
+        .page-actions .btn,
+        .section-actions .btn {
+          flex: 1;
+        }
+        .st {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .card {
+          padding: 13px;
+        }
+        .chat-launch {
+          right: 12px;
+          bottom: 12px;
+        }
+        #chat {
+          right: 10px;
+          bottom: 70px;
+          max-width: calc(100vw - 20px);
+        }
+      }
     </style>
   </head>
   <body>
     <div class="app">
       <nav>
-        <div class="logo"><i></i><span>SentinelOps</span></div>
+        <div class="logo"><svg class="logo-eye" viewBox="0 0 40 40" aria-hidden="true"><path d="M3.5 20s5.7-10 16.5-10 16.5 10 16.5 10-5.7 10-16.5 10S3.5 20 3.5 20Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="20" r="6.2" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="20" cy="20" r="2.3" fill="var(--gr)"/></svg><span>Raqeeb</span></div>
         <div id="nl"></div>
         <div class="sys">
           <div>
-            <span class="dot"></span
-            ><b style="color: var(--gr)">SYSTEM ONLINE</b>
+            <span class="dot"></span><b style="color: var(--gr)">SYSTEM ONLINE</b>
           </div>
           <div>Active cameras: 47 / 48</div>
+          <div>AI detector: <b id="aist">OFFLINE</b></div>
           <div>Last sync: <span class="sy">--</span></div>
           <div>Sep 29, 2026 · <span class="sy">--</span></div>
         </div>
@@ -621,19 +1039,77 @@
             id="q"
             placeholder="Search Person ID, camera, incident, location, type…"
             oninput="sq(this.value)"
-          /><span class="chip on" style="color: var(--am)">DEMO MODE</span
-          ><span class="chip" id="dm" onclick="tgDemo()"></span
-          ><span class="chip" onclick="bell()">🔔 <b id="bc">0</b></span>
+          />
+          <span class="chip mode-chip" id="modeLabel">DEMO DATA</span>
+          <span class="chip" id="aic" onclick="go('ai')">AI: offline</span>
+          <span class="chip" id="dm" onclick="tgDemo()"></span>
+          <span class="chip" onclick="bell()">🔔 <b id="bc">0</b></span>
         </header>
         <div id="np" class="card"></div>
         <main id="main"></main>
       </div>
     </div>
+    <button
+      class="chat-launch"
+      type="button"
+      onclick="toggleChat()"
+      aria-controls="chat"
+      aria-expanded="false"
+    >
+      ◌ Person Search
+    </button>
+    <section id="chat" aria-label="Person search assistant">
+      <div id="chatHead">
+        <div>
+          <b>Person Search Assistant</b>
+          <div class="mu" style="font-size: 11px">Live AI & simulated anonymous records</div>
+        </div>
+        <button
+          class="x"
+          type="button"
+          onclick="toggleChat()"
+          aria-label="Close assistant"
+        >
+          ×
+        </button>
+      </div>
+      <div id="chatLog" aria-live="polite">
+        <div class="chat-msg">
+          Describe someone to search live AI tracks and demo records. Try: “Find a person wearing a blue shirt.”
+        </div>
+        <button
+          class="chip"
+          type="button"
+          onclick="chatSearch('Find a person wearing a blue shirt')"
+        >
+          Find person in a blue shirt
+        </button>
+      </div>
+      <form id="chatForm" onsubmit="submitChat(event)">
+        <input
+          id="chatInput"
+          autocomplete="off"
+          placeholder="Describe clothing, location, or ID…"
+          aria-label="Describe a person"
+        />
+        <button class="btn" type="submit" aria-label="Search">Search</button>
+      </form>
+    </section>
     <div id="m" class="ov" onclick="if (event.target == this) closeM();">
       <div id="mb" class="md"></div>
     </div>
     <div id="ts"></div>
     <script>
+      const PERSON_APPEARANCE = {
+        "P-10482": "Blue shirt",
+        "P-08321": "Black jacket",
+        "P-12091": "White shirt",
+        "P-07750": "Red jacket",
+        "P-09977": "Green shirt",
+        "P-11420": "Gray jacket",
+        "P-13005": "Navy shirt",
+        "P-12888": "Yellow top",
+      };
       const $ = (s) => document.querySelector(s),
         pad = (n) => String(n).padStart(2, "0");
       const COL = {
@@ -1164,7 +1640,7 @@
           .map((v, i) => {
             const h = (v / mx) * 90,
               x = 8 + i * w;
-            return `<g class="vb"><rect x="${x}" y="${105 - h}" width="${w - 8}" height="${h}" rx="4" fill="${c}"><title>${l[i]}:00 — ${v}</title></rect><text x="${x + (w - 8) / 2}" y="122" fill="#7f8db0" font-size="9" text-anchor="middle">${l[i]}</text></g>`;
+            return `<g class="vb"><rect x="${x}" y="${105 - h}" width="${w - 8}" height="${h}" rx="4" fill="${c}"><title>${l[i]}:00 —${v}</title></rect><text x="${x + (w - 8) / 2}" y="122" fill="#7f8db0" font-size="9" text-anchor="middle">${l[i]}</text></g>`;
           })
           .join("")}</svg>`;
       };
@@ -1174,7 +1650,7 @@
         return `<svg viewBox="0 0 120 120" width="140">${d
           .map((x) => {
             const l = (x[1] / t) * 314;
-            const r = `<circle r="50" cx="60" cy="60" fill="none" stroke="${x[2]}" stroke-width="16" stroke-dasharray="${l} ${314 - l}" stroke-dashoffset="${-o}" transform="rotate(-90 60 60)"><title>${x[0]}: ${x[1]}</title></circle>`;
+            const r = `<circle r="50" cx="60" cy="60" fill="none" stroke="${x[2]}" stroke-width="16" stroke-dasharray="${l} ${314 - l}" stroke-dashoffset="${-o}" transform="rotate(-90 60 60)"><title>${x[0]}:${x[1]}</title></circle>`;
             o += l;
             return r;
           })
@@ -1188,7 +1664,7 @@
         `<svg viewBox="0 0 900 420" width="100%">${ZR.map((r, i) => `<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" rx="14" fill="#0f1a30" stroke="#22304f"/><text x="${r[0] + 12}" y="${r[1] + 20}" fill="#7f8db0" font-size="11">${ZN[i]}</text>`).join("")}${C.map(
           (c) => {
             const k = cc(c);
-            return `<g onclick="openCam('${c.id}')" style="cursor:pointer">${k == "var(--rd)" ? `<circle class="pr" cx="${c.x}" cy="${c.y}" r="7" style="fill:var(--rd)"/>` : ""}<circle cx="${c.x}" cy="${c.y}" r="6" style="fill:${k}" stroke="#070b14" stroke-width="2"><title>${c.id} · ${c.loc}</title></circle></g>`;
+            return `<g onclick="openCam('${c.id}')" style="cursor:pointer">${k == "var(--rd)" ? `<circle class="pr" cx="${c.x}" cy="${c.y}" r="7" style="fill:var(--rd)"/>` : ""}<circle cx="${c.x}" cy="${c.y}" r="6" style="fill:${k}" stroke="#070b14" stroke-width="2"><title>${c.id} ·${c.loc}</title></circle></g>`;
           },
         ).join(
           "",
@@ -1221,7 +1697,7 @@
               ["Suspicious Activities", 12 + S.sus, "Last 24 hours", H.am],
               ["System Health", "98.7%", "2 cyber events open", H.gr],
             ];
-          return `<div><h1>Security Overview</h1><div class="mu">Hall B is the current focus. Live status for the whole venue, demo data only.</div></div>${t ? `<div class="al cr" style="--c:var(--rd)" onclick="openAlert('${t.id}')"><div class="ab"></div><div><div class="am"><b style="font-size:16px">${t.type}</b>${bd("CRITICAL")}${bd(t.st, "var(--cy)")}</div><div class="mu">${t.pid} · ${t.cam} · ${t.loc} · ${t.t} · confidence ${t.conf}% · video evidence ready</div></div><button class="btn">Review evidence</button></div>` : ""}
+          return `<section class="page-head"><div><div class="eyebrow">VENUE OPERATIONS</div><h1>Security overview</h1><div class="mu">${AI.on ? "Live camera intelligence alongside venue activity." : "Venue activity from demo data. Connect a camera for live intelligence."}</div></div><div class="page-actions"><button class="btn" onclick="go('ai')">Open live camera</button><button class="btn o" onclick="go('alerts')">Review alerts · ${ac.length}</button><button class="btn o" onclick="askAssistantAboutCamera('CAM-AI', 'Summarize the latest camera activity and open security alerts')">Ask assistant</button></div></section>${t ? `<div class="al cr" style="--c:var(--rd)" onclick="openAlert('${t.id}')"><div class="ab"></div><div><div class="am"><b style="font-size:16px">${t.type}</b>${bd("CRITICAL")}${bd(t.st, "var(--cy)")}</div><div class="mu">${t.pid} · ${t.cam} ·${t.loc} · ${t.t} · confidence ${t.conf}% · video evidence ready</div></div><button class="btn">Review evidence</button></div>` : ""}
 <div class="g st">${r.map((x) => stat(...x, x[3])).join("")}</div>
 <div class="g two"><div class="card"><h2>Venue security map</h2>${map()}</div><div class="card"><h2>Live event feed</h2>${E.slice(
             0,
@@ -1229,16 +1705,16 @@
           )
             .map(
               (e, i) =>
-                `<div class="ev ${S.fresh && !i ? "nw" : ""}"><span class="mu" style="font-family:monospace;font-size:12px">${e.t}</span><div><b>${e.x}</b> ${bd(e.s == "LOW" ? "INFO" : e.s, COL[e.s])}<div class="mu" style="font-size:12px">${e.cam}${e.p ? " · Person " + e.p : ""}</div></div></div>`,
+                `<div class="ev ${S.fresh && !i ? "nw" : ""}"><span class="mu" style="font-family:monospace;font-size:12px">${e.t}</span><div><b>${e.x}</b>${bd(e.s == "LOW" ? "INFO" : e.s, COL[e.s])}<div class="mu" style="font-size:12px">${e.cam}${e.p ? " · Person " + e.p : ""}</div></div></div>`,
             )
             .join("")}</div></div>
-<div class="g st"><div class="card"><h2>Is the system secure?</h2><span class="mu">1 DDoS being mitigated on CAM-17, 1 firmware warning on CAM-24.</span></div><div class="card"><h2>Predicted failure</h2><span class="mu">CAM-24 · Hall C · about 10 min</span></div><div class="card"><h2>Evidence</h2><span class="mu">${A.length} incidents with 30 s before/after clips.</span></div></div>`;
+<div class="g st"><div class="card"><h2>Is the system secure?</h2><span class="mu">1 DDoS being mitigated on CAM-17, 1 firmware warning on CAM-24.</span></div><div class="card"><h2>Predicted failure</h2><span class="mu">CAM-24 · Hall C · about 10 min</span></div><div class="card"><h2>Evidence</h2><span class="mu">${A.length} incidents with 30 s before/after clips.</span></div><div class="card" onclick="go('ai')" style="cursor:pointer"><h2>AI detector</h2><span class="mu" id="ai-ov">${aiSummary()}</span></div></div>`;
         },
         alerts() {
           return `<h1>Security Alerts</h1>${flt()}<div class="g">${fa(A).map(arow).join("") || '<div class="mu">No alerts match. Clear the search or filters.</div>'}</div>`;
         },
         live() {
-          return `<h1>Live Monitoring</h1><div class="g" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${[
+          return `<h1>Live Monitoring</h1><div class="g" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${AI.on ? `<div onclick="go('ai')" style="cursor:pointer">${aiScene()}</div>` : ""}${[
             "CAM-17",
             "CAM-09",
             "CAM-31",
@@ -1252,8 +1728,16 @@
             })
             .join("")}</div>`;
         },
+        ai() {
+          const s = AI.st;
+          if (!AI.on)
+            return `<div><h1>AI Detector</h1><div class="mu">Real-time object detection (YOLO26n + Weapon Model) with TrackTrack multi-object tracking.</div></div><div class="card" style="border-color:#fbbf2466"><div class="am"><b style="font-size:16px">Detector offline</b>${bd("OFFLINE", "var(--am)")}</div><div class="mu" style="margin-top:8px">Start the backend, then open <b>http://localhost:8000</b>:<br><code>python server.py</code> for the webcam, <code>python server.py --source 1</code> for external USB phone camera, or <code>python server.py --replay samples/detections.csv</code>.<br>Trying <b>${AI.url || location.origin}</b> every few seconds.</div></div>`;
+          return `<section class="page-head"><div><div class="eyebrow">CAMERA INTELLIGENCE</div><h1>AI Detector</h1><div class="mu">Real-time detection with anonymous tracking and weapon alerts.</div></div><div class="page-actions"><button class="btn o" onclick="askAssistantAboutCamera('CAM-AI', 'Review recent detections from CAM-AI and summarize anything unusual')">Investigate with assistant</button></div></section>
+<div class="g two"><div class="card"><div class="section-head"><h2>${s.mode == "replay" ? "Recorded feed" : "Live camera feed"}</h2><div class="section-actions"><button class="btn o" onclick="refreshAiStream()">Refresh feed</button><button class="btn o" onclick="openCameraScreenshot('CAM-AI')">Capture still</button><button class="btn o" onclick="openCameraFullscreen()">Full screen</button></div></div>${aiScene()}</div><div class="card"><h2>Detector status</h2><div id="ai-stats">${aiStats()}</div></div></div>
+<div class="card tw"><div class="am" style="justify-content:space-between"><h2>Tracked objects</h2><div class="am"><a class="btn o" style="text-decoration:none" href="${AI.url}/api/detections.csv">Download detections.csv</a><a class="btn o" style="text-decoration:none" href="${AI.url}/api/entities.json">Download entities.json</a></div></div>${aiTable()}</div>`;
+        },
         people() {
-          return `<h1>People Tracking</h1><div class="card tw"><table><tr><th>Person ID</th><th>First seen</th><th>Last seen</th><th>Location</th><th>Camera</th><th>Activity</th><th>Risk</th><th>Status</th></tr>${P.filter(
+          return `<h1>People Tracking</h1>${AI.on ? `<div class="card tw"><h2>Live AI tracks</h2>${aiTable()}</div><h2>Demo profiles</h2>` : ""}<div class="card tw"><table><tr><th>Person ID</th><th>First seen</th><th>Last seen</th><th>Location</th><th>Camera</th><th>Activity</th><th>Risk</th><th>Status</th></tr>${P.filter(
             m,
           )
             .map(
@@ -1271,7 +1755,7 @@
                   : c.st == "DEGRADED"
                     ? "var(--am)"
                     : "var(--rd)";
-              return `<div class="card cc" onclick="openCam('${c.id}')"><div class="am"><b>${c.id}</b>${bd(c.st, k)}</div><div>${c.loc}</div><div class="mu" style="font-size:12px">Health ${c.h}% · ${c.net} · Checked ${c.chk}<br>Last event: ${c.ev}</div><div class="tk"><i style="width:${c.h}%;--c:${k}"></i></div></div>`;
+              return `<div class="card cc" onclick="openCam('${c.id}')"><div class="am"><b>${c.id}</b>${bd(c.st, k)}</div><div>${c.loc}</div><div class="mu" style="font-size:12px">Health ${c.h}\% ·${c.net} · Checked ${c.chk}<br>Last event:${c.ev}</div><div class="tk"><i style="width:${c.h}\%;--c:${k}"></i></div></div>`;
             })
             .join("")}</div>`;
         },
@@ -1283,7 +1767,7 @@
               .map((s) => {
                 const x = l.filter((a) => a.sev == s);
                 return x.length
-                  ? `<div><h2 style="color:${COL[s]}">${s} · ${x.length}</h2><div class="g" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">${x.map((a) => `<div class="card" style="border-left:3px solid ${COL[s]}"><div class="am"><b>${a.id}</b>${bd(a.sev)}</div><div style="margin:6px 0"><b>${a.type}</b></div><div class="mu" style="font-size:12px">${a.pid} · ${a.cam} · ${a.loc}<br>${a.t} · Assigned to ${a.op}</div><div class="am" style="margin-top:10px">${sel(a)}<button class="btn o" onclick="openAlert('${a.id}')">Open</button></div></div>`).join("")}</div></div>`
+                  ? `<div><h2 style="color:${COL[s]}">${s} · ${x.length}</h2><div class="g" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">${x.map((a) => `<div class="card" style="border-left:3px solid ${COL[s]}"><div class="am"><b>${a.id}</b>${bd(a.sev)}</div><div style="margin:6px 0"><b>${a.type}</b></div><div class="mu" style="font-size:12px">${a.pid} ·${a.cam} · ${a.loc}<br>${a.t} · Assigned to ${a.op}</div><div class="am" style="margin-top:10px">${sel(a)}<button class="btn o" onclick="openAlert('${a.id}')">Open</button></div></div>`).join("")}</div></div>`
                   : "";
               })
               .join("")
@@ -1356,12 +1840,315 @@
           ])}</div></div>`;
         },
         set() {
-          return `<h1>Settings</h1><div class="card g"><label class="am"><input type="checkbox" ${S.demo ? "checked" : ""} onchange="tgDemo()"> Demo simulation</label><label class="am"><input type="checkbox" checked> Open critical alerts automatically</label><label class="am"><input type="checkbox" checked disabled> Person IDs are temporary and anonymous</label><span class="mu">All detections, feeds and logs on this page are simulated.</span></div>`;
+          return `<h1>Settings</h1><div class="card g"><label class="am"><input type="checkbox" ${S.demo ? "checked" : ""} onchange="tgDemo()"> Demo simulation</label><label class="am"><input type="checkbox" checked> Open critical alerts automatically</label><label class="am"><input type="checkbox" checked disabled> Person IDs are temporary and anonymous</label><label class="am">AI detector URL <input id="aiu" value="${AI.url}" placeholder="same origin" style="flex:1;max-width:320px;background:var(--card);border:1px solid var(--bd);color:var(--tx);border-radius:8px;padding:6px 10px" onchange="aiSetUrl(this.value)"></label><span class="mu">Demo detections, feeds and logs are simulated. The AI Detector page shows real YOLO detections while server.py is running.</span></div>`;
         },
       };
+
+      // --- Live AI detector integration (server.py) ---
+      const AI = { url: "", on: false, st: null, seq: -1 };
+      const ALERT_DEDUPE_MS = 60000;
+      const ALERT_DEDUPE = new Map();
+      function shouldFilterRepeatAlert(e) {
+        const key = e.seq == null
+          ? `${(e.event_type || e.class || "alert").toLowerCase()}|${(e.class || "").toLowerCase()}|${(e.severity || "LOW").toUpperCase()}`
+          : `seq:${e.seq}`;
+        const now = Date.now();
+        const last = ALERT_DEDUPE.get(key) || 0;
+        if (last && now - last < ALERT_DEDUPE_MS) return true;
+        ALERT_DEDUPE.set(key, now);
+        for (const [eventKey, eventTime] of ALERT_DEDUPE) {
+          if (now - eventTime >= ALERT_DEDUPE_MS) ALERT_DEDUPE.delete(eventKey);
+        }
+        return false;
+      }
+      function getLatestFrameUrl() {
+        const base = (AI.url || location.origin || "http://localhost:8000").replace(/\/+$/, "");
+        return `${base}/api/frame.jpg?ts=${Date.now()}`;
+      }
+      function refreshAiStream() {
+        const img = $(".aif img");
+        if (!img) return toast("Live camera video is unavailable");
+        img.src = `${AI.url}/api/stream.mjpg?refresh=${Date.now()}`;
+        toast("Live camera feed refreshed");
+      }
+      function openCameraFullscreen() {
+        const img = $(".aif img");
+        if (!img) return toast("Live camera video is unavailable");
+        if (!img.requestFullscreen) return toast("Full screen is not supported here");
+        img.requestFullscreen().catch(() => toast("Could not open full screen"));
+      }
+      function openCameraScreenshot(cameraId = "CAM-AI", snapshotUrl = "") {
+        if (document.body.classList.contains("lockdown")) {
+          stopAlertSound();
+          document.body.classList.remove("lockdown");
+        }
+        const frameUrl = snapshotUrl
+          ? new URL(snapshotUrl, AI.url || location.origin).href
+          : getLatestFrameUrl();
+        const label = cameraId || "CAM-AI";
+        const title = snapshotUrl ? "Knife detection screenshot" : "Latest camera screenshot";
+        openM(`<div><button class="x" onclick="closeM()">×</button><div class="am"><h1>${title}</h1>${bd(snapshotUrl ? "KNIFE EVIDENCE" : "LIVE FRAME", "var(--cy)")}</div><div class="mu" style="margin-bottom:10px">${label} · ${clk()}</div></div><img src="${frameUrl}" alt="${title}" style="width:100%;max-height:65vh;object-fit:contain;border-radius:12px;border:1px solid var(--bd);background:#02050d"><div class="am" style="margin-top:10px"><button class="btn o" onclick="closeM()">Close</button><button class="btn" onclick="window.open('${frameUrl}', '_blank')">Open full image</button></div>`, "dr");
+      }
+      function askAssistantAboutCamera(cameraId, message) {
+        const id = cameraId || "CAM-AI";
+        const query = message || `Search ${id} for suspicious activity, people, or recent threats`;
+        if (!$("#chat").classList.contains("on")) toggleChat();
+        setTimeout(() => {
+          $("#chatInput").value = query;
+          chatSearch(query);
+        }, 120);
+      }
+      try {
+        AI.url =
+          new URLSearchParams(location.search).get("ai") ||
+          localStorage.getItem("raqeeb.ai") ||
+          (location.protocol.startsWith("http") ? "" : "http://localhost:8000");
+      } catch (e) {
+        AI.url = location.protocol.startsWith("http") ? "" : "http://localhost:8000";
+      }
+      AI.url = AI.url.replace(/\/+$/, "");
+      const esc = (v) =>
+        String(v).replace(/[&<>"']/g, (c) => "&#" + c.charCodeAt(0) + ";");
+      const tid = (id) => "TRK-" + String(id).padStart(3, "0");
+      const hms = (iso) => String(iso).slice(11, 19);
+
+      function aiSummary() {
+        if (!AI.on) return "Offline. Run server.py to see real detections.";
+        const s = AI.st;
+        if (s.status == "error") return "Error: " + esc(s.error);
+        return `${s.dets.length} objects in view · ${s.entities.length} tracked · ${s.fps} FPS · ${s.mode == "replay" ? "replay" : "live camera"}`;
+      }
+      function aiScene() {
+        const s = AI.st;
+        const feed = s.video
+          ? `<img src="${AI.url}/api/stream.mjpg" alt="Live detector feed">`
+          : `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:20px;text-align:center;color:var(--mu);background:repeating-linear-gradient(0deg,transparent,transparent 31px,var(--bd) 32px),repeating-linear-gradient(90deg,transparent,transparent 31px,var(--bd) 32px)"><b>${s.mode == "replay" ? "REPLAY MODE · NO CAMERA VIDEO" : "CAMERA FEED UNAVAILABLE"}</b><span>${s.error ? esc(s.error) : "Run server.py without --replay and check the camera source."}</span></div>`;
+        return `<div class="vid hot aiv"><i class="gd"></i><div class="aif" style="aspect-ratio:${s.w}/${s.h}">${feed}<div class="aib" style="position:absolute;inset:0"></div></div><span class="tag" style="color:var(--gr)">CAM-AI · ${s.mode == "replay" ? "REPLAY" : "LIVE"} · YOLO26n + Weapon AI</span><span class="rec">● ${s.mode == "replay" ? "REPLAY" : "LIVE"}</span></div>`;
+      }
+      function aiStats() {
+        const s = AI.st,
+          c = Object.entries(s.counts);
+        return `<div class="kv"><div><small>Status</small>${esc(s.status.toUpperCase())}</div><div><small>Mode</small>${s.mode == "replay" ? "Replay" : "Live camera"}</div><div style="overflow-wrap:anywhere"><small>Source</small>${esc(s.source)}</div><div><small>Frame</small>${s.frame}</div><div><small>Speed</small>${s.fps} FPS</div><div><small>Resolution</small>${s.w}×${s.h}</div><div><small>In view now</small>${s.dets.length}</div><div><small>Unique tracks</small>${s.entities.length}</div></div>${s.error ? `<div style="color:var(--rd);margin-top:8px">${esc(s.error)}</div>` : ""}<div class="mu" style="margin-top:10px">${c.length ? c.map(([k, v]) => `${esc(k)}: <b style="color:var(--tx)">${v}</b>`).join(" · ") : "Nothing in view"}</div>`;
+      }
+      function aiRows() {
+        const e = AI.st.entities;
+        return (
+          e
+            .slice()
+            .reverse()
+            .map(
+              (x) =>
+                `<tr><td style="color:var(--cy);font-weight:600">${tid(x.id)}</td><td>${esc(x.class)}</td><td>${esc(x.color || "—")}</td><td>${hms(x.first_seen)}</td><td>${hms(x.last_seen)}</td><td>${x.frames}</td><td>${Math.round(x.conf * 100)}%</td><td>${x.active ? bd("IN VIEW", "var(--gr)") : bd("LEFT VIEW", "var(--mu)")}</td></tr>`,
+            )
+            .join("") ||
+          '<tr><td colspan="8" class="mu">No objects tracked yet.</td></tr>'
+        );
+      }
+      const aiTable = () =>
+        `<table><thead><tr><th>Track ID</th><th>Class</th><th>Color</th><th>First seen</th><th>Last seen</th><th>Frames</th><th>Avg confidence</th><th>Status</th></tr></thead><tbody id="ai-ents">${aiRows()}</tbody></table>`;
+
+      function aiBoxes(el) {
+        const s = AI.st,
+          seen = new Set();
+        if (s.video) return (el.innerHTML = "");
+        for (const d of s.dets) {
+          const k = "b" + d.id;
+          seen.add(k);
+          let b = el.querySelector(`[data-k="${k}"]`);
+          if (!b) {
+            b = document.createElement("div");
+            b.dataset.k = k;
+            b.className = "bx lv" + (d.class == "person" ? "" : " ot");
+            b.innerHTML = "<em></em>";
+            el.append(b);
+          }
+          const [x1, y1, x2, y2] = d.box;
+          Object.assign(b.style, {
+            left: (x1 / s.w) * 100 + "%",
+            top: (y1 / s.h) * 100 + "%",
+            width: ((x2 - x1) / s.w) * 100 + "%",
+            height: ((y2 - y1) / s.h) * 100 + "%",
+          });
+          b.firstChild.textContent = `${tid(d.id)} ${d.class} ${Math.round(d.conf * 100)}%`;
+        }
+        el.querySelectorAll("[data-k]").forEach(
+          (b) => seen.has(b.dataset.k) || b.remove(),
+        );
+      }
+      function aiChrome() {
+        const s = AI.st,
+          live = AI.on && s.status != "error";
+        $("#aist").textContent = AI.on ? s.status.toUpperCase() : "OFFLINE";
+        $("#aist").style.color = live ? "var(--gr)" : "var(--am)";
+        const modeLabel = $("#modeLabel");
+        if (modeLabel) {
+          modeLabel.textContent = !AI.on
+            ? "DEMO DATA"
+            : s.mode == "replay"
+              ? "REPLAY FEED"
+              : live
+                ? "LIVE CAMERA"
+                : "AI ERROR";
+          modeLabel.className = "chip mode-chip" + (live ? " on" : "");
+        }
+        $("#aic").textContent = AI.on
+          ? `AI: ${s.status == "error" ? "error" : s.dets.length + " in view"}`
+          : "AI: offline";
+        $("#aic").className = "chip" + (live ? " on" : "");
+      }
+      function aiPaint() {
+        aiChrome();
+        if (!AI.on) return;
+        document.querySelectorAll(".aib").forEach(aiBoxes);
+        const set = (id, h) => {
+          const e = $("#" + id);
+          if (e) e.innerHTML = h;
+        };
+        set("ai-ents", aiRows());
+        set("ai-stats", aiStats());
+        set("ai-ov", aiSummary());
+      }
+
+      let alertAudio = null;
+      function stopAlertSound() {
+        if (!alertAudio) return;
+        alertAudio.pause();
+        alertAudio.currentTime = 0;
+        alertAudio = null;
+      }
+
+      // --- Critical alert dialog ---
+      function triggerLockdown(alertData) {
+        if (!alertData) return;
+        stopAlertSound();
+        document.body.classList.add("lockdown");
+        try {
+          alertAudio = new Audio(
+            "https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg",
+          );
+          alertAudio.play().catch(() => {});
+        } catch (e) {}
+        const cameraId = alertData.cam || "CAM-AI";
+        const screenshotButton = alertData.snapshotUrl
+          ? `<button class="btn o" onclick="openCameraScreenshot('${cameraId}', '${alertData.snapshotUrl}')">View knife screenshot</button>`
+          : `<button class="btn o" onclick="openCameraScreenshot('${cameraId}')">View camera screenshot</button>`;
+        const emergencyHtml = `
+          <div style="text-align: center; padding: 30px 10px;">
+            <div style="font-size: 60px; animation: pu 1s infinite;">🚨</div>
+            <h1 style="color: var(--rd); font-size: 32px; margin: 15px 0; text-transform: uppercase;">Critical Security Alert</h1>
+            <b style="font-size: 24px; display: block; margin-bottom: 10px;">${alertData.type || alertData.x}</b>
+            <p class="mu" style="font-size: 16px; margin-bottom: 25px;">
+              Camera: <b style="color: white">${cameraId}</b><br>
+              Time: ${alertData.t || clk()}
+            </p>
+            <div class="am" style="justify-content:center; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
+              ${screenshotButton}
+              <button class="btn o" onclick="askAssistantAboutCamera('${cameraId}', 'Search ${cameraId} for the recent weapon alert and related activity')">Ask assistant</button>
+            </div>
+            <button class="btn" style="background: var(--rd); color: #fff; width: 100%; font-size: 18px; padding: 15px;" 
+                  onclick="closeM(); toast('Alert acknowledged');">
+              Acknowledge alert
+            </button>
+          </div>
+        `;
+        openM(emergencyHtml, "critical-modal");
+      }
+
+      function aiEvent(e, quiet) {
+        const id = tid(e.id),
+          t = hms(e.time),
+          x =
+            e.kind == "new"
+              ? `New ${e.class} detected`
+              : e.kind == "alert"
+                ? e.event_type
+                : `${e.class} left view`;
+        let sev = e.severity || "LOW";
+        if (e.kind == "alert" && shouldFilterRepeatAlert(e)) return;
+        E.unshift({ t, cam: "CAM-AI", x, p: e.class == "person" ? id : "", s: sev });
+        if (E.length > 60) E.pop();
+
+        if (!quiet) {
+          if (e.kind == "alert") {
+            N.unshift({ s: sev, x: `AI ALERT: ${x} — CAM-AI`, t, u: 1 });
+            A.unshift({
+              id: "INC-AI-" + S.n++,
+              sev: sev,
+              type: x,
+              pid: e.class == "person" ? id : "TRK-AI",
+              cam: "CAM-AI",
+              loc: "Live Feed",
+              t: t,
+              st: "New",
+              conf: Math.round((e.conf || 0.9) * 100),
+              op: "OPR-AI",
+            });
+            toast(`🚨 ALERT: ${x}`);
+            if (sev === "CRITICAL" || sev === "HIGH") {
+              triggerLockdown({ type: x, cam: "CAM-AI", t: t, snapshotUrl: e.snapshot_url || "" });
+            }
+          } else if (e.kind == "new" && e.class == "person") {
+            N.unshift({
+              s: "LOW",
+              x: `AI detector: person ${id} detected — CAM-AI`,
+              t,
+              u: 1,
+            });
+            toast(`AI detector: person ${id} detected`);
+          }
+        }
+        S.fresh = 1;
+      }
+
+      async function aiPoll() {
+        let next = 5000;
+        try {
+          const r = await fetch(
+            `${AI.url}/api/state?since=${Math.max(AI.seq, 0)}`,
+            { cache: "no-store" },
+          );
+          if (!r.ok) throw new Error(r.status);
+          const s = await r.json(),
+            first = !AI.on,
+            video = AI.st && AI.st.video;
+          AI.on = true;
+          AI.st = s;
+          if (first || s.seq < AI.seq) {
+            s.events.slice(-4).forEach((e) => aiEvent(e, true));
+            toast("AI detector connected");
+          } else s.events.forEach((e) => aiEvent(e, false));
+          AI.seq = s.seq;
+          if (first || video != s.video) {
+            if (["overview", "live", "ai", "people"].includes(S.v) && !S.q)
+              render();
+          } else if (s.events.length) {
+            if (["overview", "alerts", "inc"].includes(S.v) && !S.q) render();
+            renderN();
+          }
+          next = 400;
+        } catch (e) {
+          if (AI.on) {
+            AI.on = false;
+            toast("AI detector disconnected");
+            if (["overview", "live", "ai", "people"].includes(S.v)) render();
+          }
+        }
+        aiPaint();
+        setTimeout(aiPoll, next);
+      }
+
+      function aiSetUrl(v) {
+        AI.url = v.trim().replace(/\/+$/, "");
+        try {
+          localStorage.setItem("raqeeb.ai", AI.url);
+        } catch (e) {}
+        toast("AI detector URL set to " + (AI.url || "same origin"));
+      }
+
       const NAV = [
         ["overview", "Overview", "◫"],
         ["live", "Live Monitoring", "▶"],
+        ["ai", "AI Detector", "◎"],
         ["alerts", "Security Alerts", "⚠"],
         ["people", "People Tracking", "☰"],
         ["cams", "Cameras", "◉"],
@@ -1375,9 +2162,10 @@
       function render() {
         $("#nl").innerHTML = NAV.map(
           (n) =>
-            `<a class="${S.v == n[0] ? "on" : ""}" onclick="go('${n[0]}')"><b>${n[2]}</b><span>${n[1]}</span></a>`,
+            `<a class="${S.v == n[0] ? "on" : ""}" title="${n[1]}" onclick="go('${n[0]}')"><b>${n[2]}</b><span>${n[1]}</span></a>`,
         ).join("");
         $("#main").innerHTML = V[S.v]();
+        aiPaint();
         $("#dm").textContent = "Demo Simulation: " + (S.demo ? "ON" : "OFF");
         $("#dm").className = "chip" + (S.demo ? " on" : "");
         S.fresh = 0;
@@ -1396,6 +2184,19 @@
           S.v = "alerts";
         render();
       }
+      document.addEventListener("keydown", (event) => {
+        const target = event.target;
+        const typing = target instanceof HTMLElement &&
+          (["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName) || target.isContentEditable);
+        if (event.key == "/" && !typing) {
+          event.preventDefault();
+          $("#q").focus();
+        }
+        if (event.key == "Escape") {
+          if ($("#m").classList.contains("on")) closeM();
+          else if ($("#chat").classList.contains("on")) toggleChat();
+        }
+      });
       function tgDemo() {
         S.demo = !S.demo;
         render();
@@ -1417,6 +2218,8 @@
         clearInterval(vp);
         vp = 0;
         $("#m").classList.remove("on");
+        document.body.classList.remove("lockdown");
+        stopAlertSound();
       }
       const WF = [
           "Detection",
@@ -1452,7 +2255,7 @@
 <div class="kv"><div><small>Person ID</small><a style="color:var(--cy);cursor:pointer" onclick="openPerson('${a.pid}')">${a.pid}</a></div><div><small>Camera</small><a style="color:var(--cy);cursor:pointer" onclick="openCam('${a.cam}')">${a.cam}</a></div><div><small>Location</small>${a.loc}</div><div><small>Date</small>September 29, 2026</div><div><small>Time</small>${a.t}</div><div><small>Type</small>${a.type}</div><div><small>Confidence</small>${a.conf}%</div><div><small>Status</small>${sel(a)}</div></div>
 <div class="wf">${WF.map((w, i) => `<div class="${i < x || (i == x && x == 6) ? "d" : i == x ? "a" : ""}">${w}</div>`).join("")}</div>
 <div>${scene(false, "SIMULATED VIDEO EVIDENCE", "ev", a.pid)}<div class="am" style="margin-top:8px"><button class="btn" id="pl" onclick="play()">▶</button><input type="range" id="rg" min="-30" max="30" step="0.5" value="-30" oninput="S.pt=+this.value;fr()"><button class="btn o" onclick="this.textContent=this.textContent=='🔊'?'🔇':'🔊'">🔊</button><button class="btn o" onclick="try{$('#ev').requestFullscreen()}catch(e){}">⛶</button></div><div class="am" style="justify-content:space-between;font-size:11px;color:var(--mu);margin-top:4px"><span>-30s</span><span>-20s</span><span>-10s</span><b style="color:var(--rd)">INCIDENT</b><span>+10s</span><span>+20s</span><span>+30s</span></div><div id="cp" class="mu" style="margin-top:4px">30 seconds BEFORE incident</div></div>
-<div class="am"><button class="btn" onclick="toast('Full evidence view opened (demo)')">Open Full Evidence</button><button class="btn o" onclick="toast('Incident report generated (demo)')">Download Incident Report</button></div>`);
+<div class="am"><button class="btn" onclick="openCameraScreenshot('${a.cam}')">View screenshot</button><button class="btn o" onclick="askAssistantAboutCamera('${a.cam}', 'Search ${a.cam} for the recent ${a.type.toLowerCase()} alert')">Ask assistant</button><button class="btn o" onclick="toast('Incident report generated (demo)')">Download report</button></div>`);
       }
       function fr() {
         const r = $("#rg");
@@ -1489,7 +2292,7 @@
           `<div><button class="x" onclick="closeM()">×</button><h1>${c.id} · ${c.loc}</h1></div>${scene(
             al.some((a) => a.sev == "CRITICAL" && act_(a)),
             "LIVE DEMO FEED — SIMULATED",
-          )}<div class="kv"><div><small>Status</small>${c.st}</div><div><small>Health</small>${c.h}%</div><div><small>Network</small>${c.net}</div><div><small>Latency</small>${c.lat} ms</div><div><small>Last check</small>${c.chk}</div><div><small>Last event</small>${c.ev}</div></div>${al.map(arow).join("")}`,
+          )}<div class="kv"><div><small>Status</small>${c.st}</div><div><small>Health</small>${c.h}%</div><div><small>Network</small>${c.net}</div><div><small>Latency</small>${c.lat} ms</div><div><small>Last check</small>${c.chk}</div><div><small>Last event</small>${c.ev}</div></div><div class="am" style="margin:12px 0"><button class="btn o" onclick="openCameraScreenshot('${c.id}')">View screenshot</button><button class="btn o" onclick="askAssistantAboutCamera('${c.id}', 'Search ${c.id} for the latest suspicious activity and people by camera')">Ask assistant</button></div>${al.map(arow).join("")}`,
         );
       }
       function openPerson(id) {
@@ -1506,6 +2309,101 @@
 <div><h2>Movement timeline</h2><div class="tl"><div><b>${p[1]}</b> CAM-01 · Main Entrance<br><span class="mu">Entered venue</span></div><div><b>${f(((mn(p[1]) + mn(p[2])) / 2) | 0)}</b> CAM-12 · Hall corridor<br><span class="mu">Movement tracked</span></div><div><b>${p[2]}</b> ${p[4]} · ${p[3]}<br><span class="mu">${p[5]}</span></div></div></div><div><h2>Associated alerts</h2><div class="g">${al.map(arow).join("") || '<span class="mu">None</span>'}</div></div>`,
           "dr",
         );
+      }
+      function toggleChat() {
+        const panel = $("#chat"),
+          opened = panel.classList.toggle("on");
+        $(".chat-launch").setAttribute("aria-expanded", opened);
+        if (opened) $("#chatInput").focus();
+      }
+      function chatMessage(text, role) {
+        const node = document.createElement("div");
+        node.className = "chat-msg " + role;
+        node.textContent = text;
+        $("#chatLog").append(node);
+        $("#chatLog").scrollTop = $("#chatLog").scrollHeight;
+      }
+      function submitChat(event) {
+        event.preventDefault();
+        const input = $("#chatInput"),
+          query = input.value.trim();
+        if (query) chatSearch(query);
+      }
+      function chatSearch(query) {
+        const text = query.trim();
+        if (!text) return;
+        chatMessage(text, "user");
+        $("#chatInput").value = "";
+        const normalized = text.toLowerCase(),
+          id = P.find((p) => normalized.includes(p[0].toLowerCase()))?.[0],
+          colors = {
+            blue: ["blue", "azraq", "أزرق", "ازرق"],
+            black: ["black", "dark", "aswad", "أسود", "اسود"],
+            white: ["white", "abyad", "أبيض", "ابيض"],
+            red: ["red", "ahmar", "أحمر", "احمر"],
+            green: ["green", "akhdar", "أخضر", "اخضر"],
+            gray: ["gray", "grey", "رمادي"],
+            navy: ["navy", "كحلي"],
+            yellow: ["yellow", "أصفر", "اصفر"],
+          },
+          matchColor = Object.keys(colors).find((key) =>
+            colors[key].some((word) => normalized.includes(word)),
+          );
+
+        // 1. البحث في الكاميرا الحية (Live AI Entities)
+        const liveMatches =
+          AI.on && AI.st && AI.st.entities
+            ? AI.st.entities.filter(
+                (e) =>
+                  e.class === "person" &&
+                  (normalized.includes(tid(e.id).toLowerCase()) ||
+                    (matchColor &&
+                      (e.color || "").toLowerCase().includes(matchColor)) ||
+                    (!matchColor &&
+                      (e.color || "").toLowerCase().includes(normalized))),
+              )
+            : [];
+
+        // 2. البحث في بيانات المحاكاة (Demo Profiles)
+        const results = P.filter((p) =>
+          id
+            ? p[0] == id
+            : matchColor
+              ? PERSON_APPEARANCE[p[0]].toLowerCase().includes(matchColor)
+              : [p[0], p[3], p[4], p[5], PERSON_APPEARANCE[p[0]]]
+                  .join(" ")
+                  .toLowerCase()
+                  .includes(normalized),
+        );
+
+        if (!liveMatches.length && !results.length) {
+          chatMessage(
+            "No match found in live camera or simulated records. Try a clothing color, location, activity, or Person ID.",
+            "assistant",
+          );
+          return;
+        }
+
+        const total = liveMatches.length + results.length;
+        chatMessage(
+          `Found ${total} match${total == 1 ? "" : "es"}${matchColor ? " wearing " + matchColor + " clothing" : ""} (${liveMatches.length} live AI, ${results.length} simulated).`,
+          "assistant",
+        );
+
+        liveMatches.forEach((e) => {
+          const card = document.createElement("div");
+          card.className = "chat-result";
+          card.innerHTML = `<b>${tid(e.id)} ${bd("LIVE CAMERA", "var(--gr)")}</b><div><small>Detected Clothing Color</small> ${esc(e.color || "Unknown")}</div><div><small>Last seen</small> ${hms(e.last_seen)} · CAM-AI</div><div><small>Confidence</small> ${Math.round(e.conf * 100)}%</div><button class="chip" type="button" onclick="toggleChat();go('ai')">View Live AI Feed</button>`;
+          $("#chatLog").append(card);
+        });
+
+        results.forEach((p) => {
+          const card = document.createElement("div");
+          card.className = "chat-result";
+          card.innerHTML = `<b>${p[0]}</b><div><small>Appearance</small> ${PERSON_APPEARANCE[p[0]]}</div><div><small>Last seen</small> ${p[2]} · ${p[3]}</div><div><small>Camera</small> ${p[4]}</div><div><small>Recorded activity</small> ${p[5]}</div><button class="chip" type="button" onclick="toggleChat();openPerson('${p[0]}')">Open movement timeline</button>`;
+          $("#chatLog").append(card);
+        });
+        $("#chatLog").scrollTop = $("#chatLog").scrollHeight;
       }
       function tick() {
         if (!S.demo) return;
@@ -1571,6 +2469,18 @@
           $("#bc").textContent = 0;
         }
       }
+
+      // --- زر الطوارئ السري للعرض الحي (F9 أو `) ---
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "F9" || e.key === "`") {
+          triggerLockdown({
+            type: "Weapon Detected: KNIFE",
+            cam: "CAM-AI",
+            t: clk(),
+          });
+        }
+      });
+
       setInterval(
         () =>
           document
@@ -1581,6 +2491,7 @@
       render();
       renderN();
       setInterval(tick, 6000);
+      aiPoll();
     </script>
   </body>
 </html>
