@@ -1,4 +1,4 @@
-# Raqeeb
+# Raqeeb (with chat bot)
 
 Security presentation dashboard with recorded camera sources and actual local AI recognition.
 
