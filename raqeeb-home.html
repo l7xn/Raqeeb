@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>رقيب — عينٌ ترى كل شيء، وعقلٌ يسبق الخطر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{color-scheme:dark;--bg:#05080f;--ink:#e8eefc;--mu:#8795b5;--cy:#22d3ee;--bl:#818cf8;--rd:#f43f5e;--am:#fbbf24;--bd:#16213a;--card:#0b1324}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.8 "IBM Plex Sans Arabic",system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+section{position:relative;padding:110px 24px}
+.w{max-width:1180px;margin:0 auto}
+#pg{position:fixed;top:0;right:0;height:3px;width:0;background:linear-gradient(270deg,var(--cy),var(--bl));z-index:100}
+nav{position:fixed;top:0;inset-inline:0;z-index:90;padding:calc(14px + env(safe-area-inset-top,0px)) 24px 14px;transition:.4s}
+nav.sc{background:#05080fcc;backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+nav .w{display:flex;align-items:center;gap:28px}
+.lg{display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px}
+.lg svg{width:34px;height:34px}.lg .pu{transform-origin:center;animation:bl 4s infinite}
+nav ul{display:flex;gap:26px;list-style:none;margin-inline-start:auto;color:var(--mu);font-size:15px}
+nav ul a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:14px;font-weight:600;font-size:16px;border:1px solid var(--bd);transition:.3s;cursor:pointer;color:var(--ink);background:none}
+.btn.p{background:linear-gradient(135deg,var(--cy),var(--bl));color:#04101a;border:0;box-shadow:0 10px 40px #22d3ee33}
+.btn.p:hover{transform:translateY(-3px);box-shadow:0 16px 54px #22d3ee66}.btn:hover{border-color:var(--cy)}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:130px;overflow:hidden}
+.glow{position:absolute;border-radius:50%;filter:blur(110px);opacity:.5;pointer-events:none}
+.g1{width:520px;height:520px;background:#22d3ee33;top:-120px;left:-100px}.g2{width:480px;height:480px;background:#818cf833;bottom:-160px;right:-80px}
+.gridbg{position:absolute;inset:0;background:linear-gradient(#ffffff08 1px,transparent 1px) 0 0/56px 56px,linear-gradient(90deg,#ffffff08 1px,transparent 1px) 0 0/56px 56px;mask-image:radial-gradient(circle at 50% 40%,#000 20%,transparent 75%)}
+.hg{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative}
+.chip{display:inline-flex;gap:8px;align-items:center;padding:6px 14px;border:1px solid #22d3ee44;border-radius:99px;font-size:13px;color:var(--cy);background:#22d3ee0f;margin-bottom:22px}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--cy);animation:pu 1.6s infinite}
+h1{font-size:clamp(40px,6.4vw,84px);line-height:1.2;font-weight:700;letter-spacing:-.01em}
+h1 .ln{display:block}h1 .l2{background:linear-gradient(270deg,var(--cy),var(--bl));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .wd{display:inline-block;opacity:0;transform:translateY(60%) rotateX(50deg);filter:blur(10px);animation:wi 1s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.25s + var(--i)*.12s)}
+.lead{color:var(--mu);font-size:19px;max-width:560px;margin:26px 0 34px;opacity:0;animation:fu 1s .9s forwards}
+.cta{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fu 1s 1.1s forwards}
+.radar{position:relative;width:min(520px,92vw);aspect-ratio:1;margin-inline:auto;border-radius:50%;border:1px solid #22d3ee33;background:linear-gradient(90deg,transparent 49.8%,#22d3ee22 50%,transparent 50.2%),linear-gradient(transparent 49.8%,#22d3ee22 50%,transparent 50.2%),repeating-radial-gradient(circle,transparent 0 12.3%,#22d3ee22 12.5%,transparent 12.7%),radial-gradient(circle,#0c1d36,#060b16 72%);box-shadow:0 0 90px #22d3ee22,inset 0 0 60px #000;opacity:0;animation:fu 1.2s .5s forwards;transition:transform .2s}
+.sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 290deg,#22d3ee00 290deg,#22d3ee44 345deg,#22d3eecc 360deg);animation:sp 5s linear infinite}
+.bl{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 14px var(--c);transform:translate(-50%,-50%)}
+.bl:after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--c);animation:pg 2.4s infinite var(--d)}
+.lb{position:absolute;padding:6px 11px;font-size:12px;line-height:1.5;border-radius:10px;border:1px solid var(--c);background:#050a14ee;color:var(--ink);white-space:nowrap;opacity:0;animation:fu .8s forwards,bob 5s ease-in-out infinite;animation-delay:var(--d),calc(var(--d) + 1s)}
+.lb b{color:var(--c);font-weight:600;display:block;font-size:11px}
+.mq{border-block:1px solid var(--bd);background:#080e1a;overflow:hidden;direction:ltr;padding:18px 0}
+.mt{display:flex;gap:56px;width:max-content;animation:mq 38s linear infinite;color:var(--mu);font-size:16px;white-space:nowrap}
+.mt span{display:flex;gap:56px;align-items:center}.mt span:after{content:"";width:6px;height:6px;border-radius:50%;background:var(--cy)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;text-align:center}
+.stats b{display:block;font-size:clamp(40px,5vw,60px);font-weight:700;line-height:1.2;background:linear-gradient(180deg,#fff,#7f8db0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats span{color:var(--mu);font-size:15px}
+.sp{font-size:clamp(26px,3.6vw,46px);line-height:1.7;font-weight:600;max-width:1000px;margin:0 auto;text-align:center}
+.sp span{color:#2a3652;transition:color .4s}.sp span.on{color:var(--ink)}
+.h2{font-size:clamp(30px,4vw,52px);line-height:1.3;font-weight:700;margin-bottom:14px}
+.sub{color:var(--mu);max-width:620px;margin-bottom:48px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.cd{grid-column:span 2;position:relative;padding:28px;border-radius:22px;background:var(--card);border:1px solid var(--bd);overflow:hidden;transition:border-color .3s,transform .3s}
+.cd.wide{grid-column:span 3}.cd.big{grid-column:span 4}
+.cd:before{content:"";position:absolute;inset:0;background:radial-gradient(360px circle at var(--mx,50%) var(--my,0%),#22d3ee1c,transparent 60%);opacity:0;transition:.3s}
+.cd:hover{border-color:#22d3ee55;transform:translateY(-4px)}.cd:hover:before{opacity:1}
+.ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#22d3ee14;border:1px solid #22d3ee33;margin-bottom:18px}
+.cd h3{font-size:21px;margin-bottom:6px;position:relative}.cd p{color:var(--mu);font-size:15px;position:relative}
+.bars{display:flex;gap:6px;align-items:flex-end;height:70px;margin-top:18px;position:relative}.bars i{flex:1;border-radius:5px;background:linear-gradient(var(--cy),#22d3ee22);height:var(--h);transform-origin:bottom;animation:gr 2.4s ease-in-out infinite alternate;animation-delay:var(--d)}
+.steps{position:relative;display:grid;gap:44px;max-width:760px}
+.ln0{position:absolute;right:21px;top:10px;bottom:10px;width:2px;background:var(--bd)}.ln0 i{display:block;width:100%;height:0;background:linear-gradient(var(--cy),var(--bl));box-shadow:0 0 14px var(--cy)}
+.s{position:relative;padding-right:76px;opacity:.35;transition:.6s}.s.on{opacity:1}
+.s em{position:absolute;right:0;top:0;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;background:var(--bg);border:2px solid var(--bd);transition:.6s}
+.s.on em{border-color:var(--cy);color:var(--cy);box-shadow:0 0 24px #22d3ee66}
+.s h3{font-size:24px}.s p{color:var(--mu)}
+.fin{text-align:center;overflow:hidden}
+.fin .box{position:relative;padding:90px 24px;border-radius:32px;border:1px solid #22d3ee33;background:radial-gradient(circle at 50% 0%,#22d3ee1f,transparent 60%),var(--card);overflow:hidden}
+.fin .box:after{content:"";position:absolute;inset:-60%;background:conic-gradient(from 0deg,transparent,#22d3ee18,transparent 30%);animation:sp 14s linear infinite;pointer-events:none}
+.fin .box>*{position:relative;z-index:1}
+footer{border-top:1px solid var(--bd);padding:34px 24px;color:var(--mu);font-size:14px;text-align:center}
+.rv{opacity:0;transform:translateY(34px) scale(.98);filter:blur(6px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1),filter .9s;transition-delay:calc(var(--i,0)*100ms)}.rv.in{opacity:1;transform:none;filter:none}
+@keyframes wi{to{opacity:1;transform:none;filter:none}}@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes sp{to{transform:rotate(360deg)}}@keyframes pg{from{transform:scale(1);opacity:.9}to{transform:scale(3.2);opacity:0}}
+@keyframes pu{50%{opacity:.3}}@keyframes bob{50%{transform:translateY(-7px)}}@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes gr{to{transform:scaleY(.35)}}@keyframes bl{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@media(max-width:900px){.hg{grid-template-columns:1fr}.cd,.cd.wide,.cd.big{grid-column:span 6}nav ul{display:none}nav .btn{margin-inline-start:auto}section{padding:80px 20px}.lb{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,h1 .wd,.lead,.cta,.radar,.lb{opacity:1!important;transform:none!important;filter:none!important}html{scroll-behavior:auto}}
+</style></head><body>
+<div id="pg"></div>
+<nav id="nv"><div class="w"><a class="lg" href="#top"><svg viewBox="0 0 40 40" fill="none"><path d="M3 20C8 11 14 7 20 7s12 4 17 13c-5 9-11 13-17 13S8 29 3 20Z" stroke="#22d3ee" stroke-width="2"/><circle class="pu" cx="20" cy="20" r="6.5" fill="#22d3ee"/><circle cx="20" cy="20" r="2.5" fill="#05080f"/></svg>رقيب</a>
+<ul><li><a href="#features">المنصة</a></li><li><a href="#how">كيف يعمل</a></li><li><a href="#cta">التجربة</a></li></ul><a class="btn p" href="sentinelops-dashboard.html">العرض التجريبي</a></div></nav>
+
+<header class="hero" id="top"><i class="gridbg"></i><i class="glow g1" data-p=".18"></i><i class="glow g2" data-p="-.12"></i>
+<div class="w hg"><div><span class="chip"><i></i>نموذج أولي ببيانات محاكاة</span>
+<h1 id="h"><span class="ln">عينٌ ترى كل شيء،</span><span class="ln l2">وعقلٌ يسبق الخطر.</span></h1>
+<p class="lead">رقيب منصة ذكية لأمن الفعاليات الكبرى. تجمع الكاميرات والتحليل بالذكاء الاصطناعي وحماية شبكة الكاميرات نفسها في شاشة واحدة، لتعرف ماذا يحدث الآن، وأين، ومن المعني، وما مدى الخطورة.</p>
+<div class="cta"><a class="btn p" href="sentinelops-dashboard.html">شاهد رقيب وهو يعمل</a><a class="btn" href="#features">اكتشف المنصة</a></div></div>
+<div class="radar" id="rd"><div class="sweep"></div>
+<i class="bl" style="--c:#f43f5e;--d:.4s;left:64%;top:30%"></i><i class="bl" style="--c:#fbbf24;--d:1.2s;left:30%;top:58%"></i><i class="bl" style="--c:#22d3ee;--d:2s;left:72%;top:72%"></i><i class="bl" style="--c:#34d399;--d:.8s;left:44%;top:22%"></i><i class="bl" style="--c:#34d399;--d:1.6s;left:22%;top:34%"></i>
+<div class="lb" style="--c:#f43f5e;--d:1.6s;left:58%;top:12%"><b>P-10482 · ثقة 94%</b>سلاح محتمل في Hall B</div>
+<div class="lb" style="--c:#fbbf24;--d:2.2s;left:4%;top:68%"><b>P-08321</b>اشتباه سرقة في الجناح 24</div>
+<div class="lb" style="--c:#22d3ee;--d:2.8s;left:52%;top:80%"><b>CAM-17</b>هجوم DDoS قيد الاحتواء</div></div></div></header>
+
+<div class="mq"><div class="mt"><span>كشف الأسلحة المحتملة</span><span>تتبّع بمعرّفات مجهولة</span><span>أدلة فيديو قبل الحادث وبعده</span><span>حماية الكاميرات سيبرانيًا</span><span>صيانة تنبؤية</span><span>إدارة الحوادث</span><span>كشف الأسلحة المحتملة</span><span>تتبّع بمعرّفات مجهولة</span><span>أدلة فيديو قبل الحادث وبعده</span><span>حماية الكاميرات سيبرانيًا</span><span>صيانة تنبؤية</span><span>إدارة الحوادث</span></div></div>
+
+<section><div class="w stats"><div class="rv"><b data-n="48">0</b><span>كاميرا ذكية تحت المراقبة</span></div><div class="rv" style="--i:1"><b data-n="8426">0</b><span>زائر يُتتبَّع يوميًا بمعرّف مؤقت</span></div><div class="rv" style="--i:2"><b data-n="3" data-pre="&lt; ">0</b><span>ثوانٍ، زمن التنبيه المستهدف</span></div><div class="rv" style="--i:3"><b data-n="98.7" data-s="%">0</b><span>صحة النظام العامة</span></div></div></section>
+
+<section><p class="sp" id="sp">المعارض والمؤتمرات الكبرى لا تحتمل لحظة غفلة. عشرات الآلاف من الزوار، ومئات الكاميرات، وتهديدات قد تأتي من الأرض أو من الشبكة. رقيب يجمع كل ذلك في رؤية واحدة، ويحوّل الفوضى إلى قرار.</p></section>
+
+<section id="features"><div class="w"><h2 class="h2 rv">كل ما يحتاجه مركز العمليات، في مكان واحد</h2><p class="sub rv">من اللحظة التي تلتقط فيها الكاميرا شيئًا مريبًا إلى لحظة إغلاق الحادث، رقيب يرافقك في كل خطوة.</p>
+<div class="bento">
+<div class="cd big rv"><div class="ic">👁</div><h3>تتبّع بلا هوية</h3><p>معرّف مؤقت لكل شخص بدل الاسم أو الوجه. تعرف أين كان وماذا فعل، دون المساس بخصوصية أحد.</p><div class="bars"><i style="--h:40%;--d:0s"></i><i style="--h:70%;--d:.2s"></i><i style="--h:55%;--d:.4s"></i><i style="--h:90%;--d:.6s"></i><i style="--h:65%;--d:.8s"></i><i style="--h:80%;--d:1s"></i><i style="--h:50%;--d:1.2s"></i><i style="--h:75%;--d:1.4s"></i><i style="--h:60%;--d:1.6s"></i><i style="--h:85%;--d:1.8s"></i></div></div>
+<div class="cd rv" style="--i:1"><div class="ic">⚠</div><h3>اكتشاف مبكر</h3><p>سلاح محتمل، اشتباه سرقة، دخول منطقة مقيدة، أو حقيبة متروكة، مع درجة ثقة لكل تنبيه.</p></div>
+<div class="cd wide rv"><div class="ic">▶</div><h3>دليل مرئي فوري</h3><p>٣٠ ثانية قبل الحادث و٣٠ ثانية بعده بنقرة واحدة، جاهزة للمراجعة والتقرير.</p></div>
+<div class="cd wide rv" style="--i:1"><div class="ic">🛡</div><h3>الكاميرا نفسها محمية</h3><p>هجمات DDoS، محاولات الدخول الفاشلة، والتلاعب بالبرمجيات الثابتة. الأمن السيبراني والأمن الميداني في نظام واحد.</p></div>
+<div class="cd wide rv"><div class="ic">⏱</div><h3>صيانة تنبؤية</h3><p>يتوقع تعطّل الكاميرا قبل وقوعه بدقائق، من ارتفاع فقد الحزم ودرجة الحرارة.</p></div>
+<div class="cd wide rv" style="--i:1"><div class="ic">📊</div><h3>تحليلات تقرأ الصورة الكاملة</h3><p>مؤشرات الحوادث والإيجابيات الكاذبة وسير عمل واضح من الاكتشاف إلى الإغلاق.</p></div></div></div></section>
+
+<section id="how"><div class="w"><h2 class="h2 rv">من الرصد إلى الاستجابة في أربع خطوات</h2><p class="sub rv">مسار واضح يختصر على المشغّل الوقت ويقلل الخطأ.</p>
+<div class="steps" id="st"><div class="ln0"><i id="ln"></i></div>
+<div class="s"><em>١</em><h3>رصد</h3><p>تغطي الكاميرات كل زوايا المكان، ويمنح رقيب كل شخص معرّفًا مؤقتًا ويتتبّع حركته.</p></div>
+<div class="s"><em>٢</em><h3>تحليل</h3><p>يرصد السلوك المريب والأشياء المحظورة، ويولّد تنبيهًا بدرجة خطورة وثقة.</p></div>
+<div class="s"><em>٣</em><h3>تحقق</h3><p>يراجع المشغّل مقطع الأدلة، ثم يؤكد الحادث أو يصنّفه إيجابيًا كاذبًا.</p></div>
+<div class="s"><em>٤</em><h3>استجابة</h3><p>يتحرك الفريق بخطة واضحة، ويُغلق الحادث بتقرير جاهز للتوثيق.</p></div></div></div></section>
+
+<section class="fin" id="cta"><div class="w"><div class="box rv"><h2 class="h2">شاهد رقيب وهو يعمل</h2><p class="sub" style="margin-inline:auto">لوحة تحكم حية بتنبيهات وأحداث تتولد أمامك، من تنبيه سلاح محتمل إلى هجوم سيبراني وتنبؤ بعطل.</p><a class="btn p" href="sentinelops-dashboard.html" style="font-size:18px;padding:16px 36px">افتح العرض التجريبي</a></div></div></section>
+<footer>رقيب، مشروع تخرج في الأمن السيبراني. جميع التنبيهات والبيانات في العرض محاكاة ولا يوجد أي تتبع أو مراقبة حقيقية.</footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+// headline words
+$$('#h .ln').forEach((l,k)=>{l.innerHTML=l.textContent.split(' ').map((w,i)=>`<span class="wd" style="--i:${i+k*3}">${w}</span>`).join(' ')});
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});$$('.rv').forEach(e=>io.observe(e));
+// counters
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;co.unobserve(e.target);const el=e.target,n=+el.dataset.n,d=n%1?1:0,t0=performance.now();
+const f=t=>{const p=rm?1:Math.min(1,(t-t0)/1800),v=n*(1-Math.pow(1-p,3));el.textContent=(el.dataset.pre||'')+v.toLocaleString('en',{minimumFractionDigits:d,maximumFractionDigits:d})+(el.dataset.s||'');if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}),{threshold:.6});$$('[data-n]').forEach(e=>co.observe(e));
+// scroll text words
+const sp=$('#sp');sp.innerHTML=sp.textContent.split(' ').map(w=>`<span>${w}</span>`).join(' ');const ws=$$('#sp span');
+const ss=$$('.s'),ln=$('#ln'),st=$('#st');
+function onScroll(){const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+$('#pg').style.width=(h>0?y/h*100:0)+'%';$('#nv').classList.toggle('sc',y>30);
+let r=sp.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight*.8-r.top)/(r.height+innerHeight*.25)));ws.forEach((w,i)=>w.classList.toggle('on',rm||i<p*ws.length));
+r=st.getBoundingClientRect();const m=innerHeight*.55,q=Math.max(0,Math.min(1,(m-r.top)/r.height));ln.style.height=(rm?100:q*100)+'%';
+ss.forEach(s=>{const b=s.getBoundingClientRect();s.classList.toggle('on',rm||b.top<m)});
+if(!rm)$$('.glow').forEach(g=>g.style.transform=`translateY(${y*g.dataset.p}px)`)}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
+// card spotlight + radar tilt
+$$('.cd').forEach(c=>c.addEventListener('pointermove',e=>{const b=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-b.left+'px');c.style.setProperty('--my',e.clientY-b.top+'px')}));
+const rd=$('#rd');if(!rm&&matchMedia('(hover:hover)').matches)addEventListener('pointermove',e=>{const x=(e.clientX/innerWidth-.5)*8,y=(e.clientY/innerHeight-.5)*8;rd.style.transform=`perspective(900px) rotateY(${x}deg) rotateX(${-y}deg)`});
+</script></body></html>
